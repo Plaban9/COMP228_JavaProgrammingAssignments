@@ -5,8 +5,8 @@ import javax.swing.*;
 // Exercise - 2
 public class Main
 {
-        public static void main(String[] args)
-        {
+    public static void main(String[] args)
+    {
         int currentChance = 0;
         int numChances = 5;
         int userInputInNumbers;
@@ -50,10 +50,11 @@ public class Main
             }
 
             currentChance++;
-        }
-        while (currentChance < numChances);
+
+        } while (currentChance < numChances);
     }
 
+    // Validation of User Input
     private static boolean validateInput(String input)
     {
         if (input != null && !input.isEmpty())

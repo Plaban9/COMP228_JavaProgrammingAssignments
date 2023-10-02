@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
+
+// Test method to do all the test operations.
 public class Test
 {
     private final int numQuestions;
@@ -53,8 +55,8 @@ public class Test
             {
                 JOptionPane.showMessageDialog(null, "Invalid Input!!", "Alert for Question " + (i + 1), JOptionPane.ERROR_MESSAGE);
             }
-        }
-        while (i < numQuestions);
+
+        } while (i < numQuestions);
 
         displayResultStatistics();
     }
@@ -155,7 +157,7 @@ public class Test
     {
         return """
                 Student Name: %s
-                
+                                
                 ===== Result =====
                 Correct Answers: %d
                 Incorrect Answers: %d

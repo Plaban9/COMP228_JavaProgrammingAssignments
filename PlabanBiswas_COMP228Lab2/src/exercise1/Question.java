@@ -1,5 +1,6 @@
 package exercise1;
 
+// Class for question object - contains Text Questions with Options + the answer Key
 public class Question
 {
     private final String question;
