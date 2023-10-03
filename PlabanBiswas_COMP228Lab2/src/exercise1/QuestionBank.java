@@ -18,6 +18,7 @@ public class QuestionBank
             d. variable""";
     public static final String QUESTION_2 = """
             By convention, we use what type of case convention in JAVA?
+            
             a. PascalCase
             b. camelCase
             c. snake_case
@@ -25,6 +26,7 @@ public class QuestionBank
 
     public static final String QUESTION_3 = """
             The keyword _________ is used to create an instance of a class.
+            
             a. break
             b. switch
             c. new
@@ -32,6 +34,7 @@ public class QuestionBank
 
     public static final String QUESTION_4 = """
             The __________ Package contains classes and interfaces that enable programs to input and output data.
+            
             a. java.util
             b. java.net
             c. java.lang
@@ -39,6 +42,7 @@ public class QuestionBank
 
     public static final String QUESTION_5 = """
             What is the default value for an instance variable of the type String?
+            
             a. null
             b. 0
             c. undefined
@@ -46,6 +50,7 @@ public class QuestionBank
 
     public static final String QUESTION_6 = """
             What is String?
+            
             a. a class
             b. a sequence of characters
             c. a non-primitive data type
