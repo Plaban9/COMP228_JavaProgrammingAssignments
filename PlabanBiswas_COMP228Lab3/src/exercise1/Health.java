@@ -1,6 +1,6 @@
 package exercise1;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class Health extends Insurance
 {
