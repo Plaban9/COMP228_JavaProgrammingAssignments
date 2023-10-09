@@ -12,7 +12,7 @@ public class Main
 {
     private static String insuranceType = null;
     private static double insuranceAmount = -1;
-    private static ArrayList<Insurance> insurances = new ArrayList<>();
+    private static final ArrayList<Insurance> insurances = new ArrayList<>();
 
     public static void main(String[] args)
     {
@@ -112,6 +112,7 @@ public class Main
         });
     }
 
+    // Recursion for validation and making the code ask for more entry of Insurances
     private static void askUserForRetry()
     {
         String enterAnotherEntry = JOptionPane.showInputDialog(null, "Do you want to enter another insurance entry? (Yes/No)", "Insurance Entry", JOptionPane.QUESTION_MESSAGE);
