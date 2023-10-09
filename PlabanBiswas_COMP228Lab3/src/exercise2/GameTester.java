@@ -36,5 +36,6 @@ public abstract class GameTester
     //endregion
 
     public abstract int getSalary();
+
     public abstract void display();
 }

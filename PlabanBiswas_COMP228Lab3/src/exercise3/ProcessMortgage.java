@@ -66,7 +66,7 @@ public class ProcessMortgage
                 JOptionPane.showMessageDialog(null, "Invalid Input!!", "Mortgage Portal", JOptionPane.ERROR_MESSAGE);
             }
 
-        }while (!areInputsValid);
+        } while(!areInputsValid);
 
         switch (mortgageType)
         {
@@ -120,7 +120,7 @@ public class ProcessMortgage
                 JOptionPane.showMessageDialog(null, "Invalid Input!!", "Mortgage Portal", JOptionPane.ERROR_MESSAGE);
             }
 
-        }while (!isInterestRateValid);
+        } while(!isInterestRateValid);
 
         return interestRate;
     }
