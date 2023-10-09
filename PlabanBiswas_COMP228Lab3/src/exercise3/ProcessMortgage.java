@@ -22,7 +22,6 @@ public class ProcessMortgage
         }
     }
 
-
     public static void processMortgages(float interest, Mortgage[] mortgages, int index)
     {
         if (mortgages.length <= index)
