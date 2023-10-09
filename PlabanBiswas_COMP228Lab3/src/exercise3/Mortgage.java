@@ -24,7 +24,7 @@ public abstract class Mortgage implements MortgageConstants
         String mortgageDetails = "Mortgage Number: " + mortgageNumber +
                 ", Customer Name: " + customerName +
                 ", Amount: $" + amount +
-                ", Interest Rate: " + interestRate + "% " +
+                ", Interest Rate: " + interestRate + "%" +
                 ", Term: " + term + " year(s)";
 
         JOptionPane.showMessageDialog(null, mortgageDetails, "Mortgage Details", JOptionPane.INFORMATION_MESSAGE);
