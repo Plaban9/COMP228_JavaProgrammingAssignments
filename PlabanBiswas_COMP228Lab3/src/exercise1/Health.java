@@ -7,7 +7,6 @@ public class Health extends Insurance
     public Health()
     {
         super("Health");
-
     }
 
     @Override
