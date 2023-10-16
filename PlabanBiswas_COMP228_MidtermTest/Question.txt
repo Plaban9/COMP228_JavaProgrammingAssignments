@@ -1,0 +1,98 @@
+
+Centennial College
+
+COMP 228: Java Programming
+Hands-on Midterm Test
+
+Student: ________________________________________________________________
+
+Be sure to read the following general instructions carefully:
+
+•	Save your program periodically just in case that your PC crashes.
+•	This lab should be completed individually by all the students.
+-	You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
+
+
+•	Submit a mute video of running your solution (simple video up to five minutes), The video shows the following:
+1.	Show your name and ID using a text file.
+2.	Scrolling your code on-screen slowly, this code should be compatible with the submitted project.
+3.	Show the results as required.
+
+•	Apply the naming conventions for variables, methods, classes, and packages:
+a.	variable names start with a lowercase character
+b.	classes start with an uppercase character
+c.	packages use only lowercase characters
+d.	methods start with a lowercase character
+
+Penalties Policies:
+1.	The assignment did not meet the instructions above faces a 20% penalty.
+2.	Late assignments will be accepted for 2 days after the due date has passed.
+Assignments will not be accepted past the 2 days limit.
+3.	Late assignments face a 35% penalty, 15% for the first day and 20% for the second day
+
+
+
+
+
+
+
+
+
+
+
+Exercise 1
+
+Start a new Eclipse Java project. Name the project: YourFullName_COMP228_MidtermTest.
+For example: JohnSmith_COMP228_MidtermTest. DO NOT create a package in this project. Let Eclipse create the default package.
+
+Create an abstract class called Book. The class should declare the following variables:
+-	an instance variable that describes the title - String
+-	an instance variable that describes the ISBN - String
+-	an instance variable that describes the publisher - String
+-	an instance variable that describes the price - double
+-	an instance variable that describes the year – integer
+
+Provide a toString() method that returns the information stored in the above variables.
+
+Create the getter and setter methods for each instance variable except price. Provide the necessary constructors. Include an abstract method setPrice(double price) to determine the price for a book. Include an abstract method getGenre() to return the genre of the book.
+
+Create two subclasses called ScienceBook and ChildrenBook.
+
+
+
+
+
+
+
+
+These subclasses should override the abstract methods setPrice and getGenre of class Book.
+
+Use the following rule for setting the price for a book:
+o	science books will have a 10% discount per each book
+o	children books will have a fixed price (specified by user).
+
+Write a driver program (another class with main method) that uses the above hierarchy. In your driver program you must implement an interaction with the user.
+•	Use showInputDialog method to let the user input book information.
+•	Use showMessageDialog method to display book information including price and type for both science and children books.
+										(10 marks)
+
+
+
+
+
+You should upload the entire project on eCentennial immediately after demonstration.
+
+Evaluation:
+Functionality
+Correct implementation of classes (instance variable declarations, constructors, getter and setter methods, etc.)
+Correct implementation of Inheritance/Polymorphism			30%
+
+
+
+20%
+Correct implementation of driver classes (declaring and creating objects, calling their methods, interacting with user, displaying results) 		35%
+Comments, correct naming of variables, methods, classes, etc.	5%
+
+Friendly input/output	10%
+Total	100%
+
