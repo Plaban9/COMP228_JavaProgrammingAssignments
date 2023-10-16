@@ -5,18 +5,16 @@ public abstract class Book
     private String publisher;
     protected double price;
     private int year;
+    protected String genre;
 
     //region Constructors
-
     public Book(String title, String ISBN, String publisher, int year)
     {
         this.title = title;
         this.ISBN = ISBN;
         this.publisher = publisher;
-        this.price = price;
         this.year = year;
     }
-
     //endregion
 
     //region Abstract Methods
@@ -73,13 +71,18 @@ public abstract class Book
     {
         this.year = year;
     }
+
+    protected void setGenre(String genre)
+    {
+        this.genre = genre;
+    }
     //endregion
     //endregion
 
     @Override
     public String toString()
     {
-        String returnString = "Title: " + title + ", ISBN:  " + ISBN + ", Publisher: " + publisher + ", Price: " + price + ", Year: " + year;
-        return "Book Details -  {" + returnString + "}";
+        String returnString = "\n\tTitle: " + title + ", \n\tISBN:  " + ISBN + ", \n\tPublisher: " + publisher + ", \n\tPrice: $" + price + ", \n\tYear: " + year + ",\n\tGenre: " + getGenre();
+        return "****** BOOK DETAILS ******\n" + returnString + "\n";
     }
 }
