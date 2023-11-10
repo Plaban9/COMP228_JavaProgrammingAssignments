@@ -7,11 +7,16 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class StudentInformation
 {
+    private static final int ROW_COUNT = 11;
+    private static final int COLUMN_COUNT = 4;
+
+    private final int width;
+    private final int height;
     private final Stage primaryStage;
 
     //region Student Details Pane
@@ -62,16 +67,29 @@ public class StudentInformation
     TextArea displayTextArea;
 
     //endregion
-    public StudentInformation(Stage primaryStage)
+    public StudentInformation(Stage primaryStage, int width, int height)
     {
         this.primaryStage = primaryStage;
+        this.width = width;
+        this.height = height;
     }
 
     public void showStudentInformation()
     {
         GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(20, 30, 20, 30));
+        gridPane.setAlignment(Pos.CENTER_LEFT);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20, 150, 10, 10));
+
+        RowConstraints rowConstraints = new RowConstraints();
+        rowConstraints.setPercentHeight((float) height / ROW_COUNT);
+
+        for (int i = 0; i < ROW_COUNT; i++)
+        {
+            gridPane.getRowConstraints().add(rowConstraints);
+        }
+
 
         addLabelsTextFields(gridPane);
         addCheckBox(gridPane);
@@ -79,7 +97,7 @@ public class StudentInformation
         addComboBoxesListBoxes(gridPane);
         addTextArea(gridPane);
 
-        Scene scene = new Scene(gridPane, 1600, 900); // Set/Replace the stage title Pane in 1st parameter
+        Scene scene = new Scene(gridPane, width, height); // Set/Replace the stage title Pane in 1st parameter
         primaryStage.setTitle("Student Information Panel"); // Place the scene in the stage
         primaryStage.setScene(scene); // Display the stage
         primaryStage.show(); // Display the stage
@@ -118,6 +136,11 @@ public class StudentInformation
 
         displayButton = new Button("Display");
 
+        HBox hDisplayBox = new HBox(displayButton);
+        hDisplayBox.setMinWidth(width);
+        hDisplayBox.setAlignment(Pos.CENTER);
+        hDisplayBox.setPadding(new Insets(10, 10, 10, 10));
+
         gridPane.add(nameLabel, 0, 0);
         gridPane.add(nameTextField, 1, 0);
 
@@ -139,7 +162,10 @@ public class StudentInformation
         gridPane.add(emailLabel, 0, 6);
         gridPane.add(emailTextField, 1, 6);
 
-        gridPane.add(displayButton, 0, 7);
+        gridPane.add(hDisplayBox, 0, 7);
+
+        gridPane.getColumnConstraints().add(new ColumnConstraints(width * 0.25f));
+        gridPane.getColumnConstraints().add(new ColumnConstraints(width * 0.25f));
 
         displayButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -158,6 +184,8 @@ public class StudentInformation
 
         gridPane.add(studentCouncilCheckBox, 2, 1);
         gridPane.add(volunteerWorkCheckBox, 2, 5);
+
+        gridPane.getColumnConstraints().add(new ColumnConstraints(width * 0.2f));
     }
 
     private void addRadioButtons(GridPane gridPane)
@@ -169,6 +197,11 @@ public class StudentInformation
 
         computerScienceRadioButton.setToggleGroup(toggleGroup);
         businessRadioButton.setToggleGroup(toggleGroup);
+
+        HBox radioButtonHBox = new HBox(10f, computerScienceRadioButton, businessRadioButton);
+        radioButtonHBox.setPadding(new Insets(10f, 10f, 10f, 10f));
+        radioButtonHBox.setMinWidth(0.3f * width);
+        radioButtonHBox.setAlignment(Pos.CENTER_LEFT);
 
         toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
         {
@@ -199,14 +232,20 @@ public class StudentInformation
 
         toggleGroup.selectToggle(computerScienceRadioButton);
 
-        gridPane.add(computerScienceRadioButton, 3, 0);
-        gridPane.add(businessRadioButton, 4, 0);
+        gridPane.add(radioButtonHBox, 3, 0);
+//        gridPane.add(businessRadioButton, 4, 0);
+
     }
 
     private void addComboBoxesListBoxes(GridPane gridPane)
     {
         courseComboBox = new ComboBox<String>(FXCollections.observableArrayList(computerScienceCourses));
         courseListView = new ListView<String>();
+
+        courseComboBox.setMaxWidth(0.24f * width);
+        courseListView.setMaxWidth(0.24f * width);
+        courseListView.setMinHeight(0.375f * height);
+
         courseComboBox.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent ae)
@@ -220,27 +259,42 @@ public class StudentInformation
             }
         });
 
-        gridPane.add(courseComboBox, 3, 3);
-        gridPane.add(courseListView, 3, 4);
+        VBox verticalBox = new VBox(10f, courseComboBox, courseListView);
+        verticalBox.setAlignment(Pos.TOP_LEFT);
+        verticalBox.setPadding(new Insets(0f, 10f, 25f, 10f));
+
+        gridPane.add(verticalBox, 3, 4);
+//        gridPane.add(courseListView, 3, 4);
     }
 
     private void addTextArea(GridPane gridPane)
     {
         displayTextArea = new TextArea();
-        gridPane.add(displayTextArea, 0, 8);
+        displayTextArea.setMinWidth(width * 0.98f);
+        displayTextArea.setMaxWidth(width * 0.98f);
+
+        displayTextArea.setMinHeight(height * 0.25f);
+        displayTextArea.setMaxWidth(height * 0.25f);
+
+        gridPane.add(displayTextArea, 0, 9);
     }
 
     private String getDisplayText()
     {
-        String displayText = "";
+        String displayText;
 
         displayText = nameTextField.getText() + ", " + addressTextField.getText() + ", " + provinceTextField.getText() + ", " + cityTextField.getText() + ", " + postalCodeTextField.getText() + ", " + phoneNumberTextField.getText() + ", " + emailTextField.getText();
 
         displayText += "\n";
-        displayText += getProgram() + "\n";
-        displayText += "Courses\n";
+        displayText += "Program: " + getProgram() + "\n";
+        displayText += "---- Courses ----\n";
         displayText += getListViewItems();
-        displayText += getAdditionalWork();
+
+        if (getAdditionalWork() != null && !getAdditionalWork().isEmpty())
+        {
+            displayText += "---- Additional Work ----\n";
+            displayText += getAdditionalWork();
+        }
 
         return displayText;
     }

@@ -11,7 +11,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage)
     {
-        StudentInformation studentInformation = new StudentInformation(primaryStage);
+        StudentInformation studentInformation = new StudentInformation(primaryStage, 1000, 450);
         studentInformation.showStudentInformation();
     }
 }
