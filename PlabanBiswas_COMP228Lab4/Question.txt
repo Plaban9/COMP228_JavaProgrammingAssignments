@@ -1,0 +1,71 @@
+
+
+
+Centennial College
+
+COMP 228: Java Programming
+LAB #4 – Developing UI using JavaFx
+
+Student: _____________________________________________________________________
+
+Due Date:	Week 9.
+Purpose:	The purpose of this Lab assignment is to:
+•	Practice the use of JavaFX.
+
+References:	Learning materials for weeks 7, 8, textbook, and other references (if any).
+
+This material provides the necessary information you need to complete the exercises.
+
+Be sure to read the following general instructions carefully:
+
+•	This lab should be completed individually by all the students.
+-	You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
+
+•	You must name your Eclipse project according to the following rule:
+YourFullName_COMP228Labnumber
+Example: JohSmith_COMP228Lab2
+
+•	Submit your assignment in a zip file that is named according to the following rule: YourLastName_COMP228Labnumber.zip
+Example: JohSmith_COMP228Lab2.zip
+
+•	Submit a mute video of running your solution (simple video up to five minutes), The video shows the following:
+1.	Show your name and ID using a text file.
+2.	Scrolling your code on-screen slowly, this code should be compatible with the submitted project.
+3.	Show the results as required.
+
+•	Apply the naming conventions for variables, methods, classes, and packages:
+a.	variable names start with a lowercase character
+b.	classes start with an uppercase character
+c.	packages use only lowercase characters
+d.	methods start with a lowercase character
+
+
+Penalties Policies:
+1.	The assignment did not meet the instructions above faces a 20% penalty.
+2.	Late assignments will be accepted for 2 days after the due date has passed.
+Assignments will not be accepted past the 2 days limit.
+3.	Late assignments face a 35% penalty, 15% for the first day and 20% for the second day
+
+Exercise 1
+
+Write a Java application using JavaFx which allows the user to enter student information (see the sample design below).
+
+The user will enter full name, address, city, province, postal code, phone number and email in text field controls. The student’s major (Computer Science or Business) will be selected from two radio buttons.
+A combo box will display the list of courses for each program whenever the user selects the desired program.
+A course will be added to a list box whenever the user selects a course from the corresponding combo box. Make sure that the user cannot add a course several times.
+
+Additional information about the student will be provided from a group of check boxes (such as involvement in various activities, etc).
+
+All the information about the student will be displayed in a text area component. Use simple JavaFX layout managers, such as FlowPane, BorderPane, and GridPane to create the JavaFX GUI of this application.
+											(10 marks)
+
+Evaluation:
+Functionality
+Correct implementation of UI			40%
+
+Correct implementation of event handling and display of results 		40%
+Comments, correct naming of variables, methods, classes, etc.	5%
+
+Friendly input/output	15%
+Total	100%
+
