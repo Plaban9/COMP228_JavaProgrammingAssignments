@@ -14,6 +14,4 @@ public class Main extends Application
         StudentInformation studentInformation = new StudentInformation(primaryStage);
         studentInformation.showStudentInformation();
     }
-
-
 }

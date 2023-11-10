@@ -1,4 +1,8 @@
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -40,18 +44,23 @@ public class StudentInformation
     CheckBox volunteerWorkCheckBox;
     //endregion
 
+
     //region Student Radio Button
+    ToggleGroup toggleGroup;
     RadioButton computerScienceRadioButton;
     RadioButton businessRadioButton;
     //endregion
 
     //region Student Combo Boxes and List Boxes
+    String[] computerScienceCourses = new String[]{"Java", "C#", "Python", "Data Structures", "C++"};
+    String[] businessCourses = new String[]{"Project Management", "Six Sigma", "Statistics", "Mathematics", "Resource Management"};
     ComboBox<String> courseComboBox;
     ListView<String> courseListView;
     //endregion
 
     //region Student Text Box
     TextArea displayTextArea;
+
     //endregion
     public StudentInformation(Stage primaryStage)
     {
@@ -80,28 +89,34 @@ public class StudentInformation
     {
         // Student Labels and Text Input
         nameLabel = new Label("Name: ");
-        nameTextField = new TextField("Enter Name Here...");
+        nameTextField = new TextField();
+        nameTextField.setPromptText("Enter Name Here...");
 
         addressLabel = new Label("Address: ");
-        addressTextField = new TextField("Enter Address Here...");
+        addressTextField = new TextField();
+        addressTextField.setPromptText("Enter Address Here...");
 
         provinceLabel = new Label("Province: ");
-        provinceTextField = new TextField("Enter Province Here...");
+        provinceTextField = new TextField();
+        provinceTextField.setPromptText("Enter Province Here...");
 
         cityLabel = new Label("City: ");
-        cityTextField = new TextField("Enter City Here...");
+        cityTextField = new TextField();
+        cityTextField.setPromptText("Enter City Here...");
 
         postalCodeLabel = new Label("Postal Code: ");
-        postalCodeTextField = new TextField("Enter Postal Code Here...");
+        postalCodeTextField = new TextField();
+        postalCodeTextField.setPromptText("Enter Postal Code Here...");
 
         phoneNumberLabel = new Label("Phone number: ");
-        phoneNumberTextField = new TextField("Enter Phone Number Here...");
+        phoneNumberTextField = new TextField();
+        phoneNumberTextField.setPromptText("Enter Phone Number Here...");
 
         emailLabel = new Label("Email: ");
-        emailTextField = new TextField("Enter Email Here...");
+        emailTextField = new TextField();
+        emailTextField.setPromptText("Enter Email Here...");
 
         displayButton = new Button("Display");
-
 
         gridPane.add(nameLabel, 0, 0);
         gridPane.add(nameTextField, 1, 0);
@@ -125,6 +140,15 @@ public class StudentInformation
         gridPane.add(emailTextField, 1, 6);
 
         gridPane.add(displayButton, 0, 7);
+
+        displayButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                displayTextArea.setText(getDisplayText());
+            }
+        });
     }
 
     private void addCheckBox(GridPane gridPane)
@@ -138,12 +162,41 @@ public class StudentInformation
 
     private void addRadioButtons(GridPane gridPane)
     {
+        toggleGroup = new ToggleGroup();
+
         computerScienceRadioButton = new RadioButton("Computer Science");
         businessRadioButton = new RadioButton("Business");
 
-        ToggleGroup toggleGroup = new ToggleGroup();
         computerScienceRadioButton.setToggleGroup(toggleGroup);
         businessRadioButton.setToggleGroup(toggleGroup);
+
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
+        {
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle old_toggle, Toggle new_toggle)
+            {
+                if (toggleGroup.getSelectedToggle() != null)
+                {
+                    RadioButton radioButton = (RadioButton) toggleGroup.getSelectedToggle();
+
+                    if (courseComboBox != null && courseListView != null)
+                    {
+                        switch (radioButton.getText())
+                        {
+                            case "Computer Science":
+                                courseComboBox.setItems(FXCollections.observableArrayList(computerScienceCourses));
+                                courseListView.getItems().clear();
+                                break;
+
+                            case "Business":
+                                courseComboBox.setItems(FXCollections.observableArrayList(businessCourses));
+                                courseListView.getItems().clear();
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+
         toggleGroup.selectToggle(computerScienceRadioButton);
 
         gridPane.add(computerScienceRadioButton, 3, 0);
@@ -152,13 +205,20 @@ public class StudentInformation
 
     private void addComboBoxesListBoxes(GridPane gridPane)
     {
-        //TODO: Reference of Radio Button Needed
-        String[] computerScienceCourses = new String[]{"Java", "C#", "Python", "Data Structures", "C++"};
-        String[] businessCourses = new String[]{"Project Management", "Six Sigma", "Statistics", "Mathematics", "Resource Management"};
-
         courseComboBox = new ComboBox<String>(FXCollections.observableArrayList(computerScienceCourses));
-        // TODO: Add an item when user selects from list view (no duplicates)
         courseListView = new ListView<String>();
+        courseComboBox.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent ae)
+            {
+                String selectedValue = courseComboBox.getValue();
+
+                if (!courseListView.getItems().contains(selectedValue))
+                {
+                    courseListView.getItems().add(selectedValue);
+                }
+            }
+        });
 
         gridPane.add(courseComboBox, 3, 3);
         gridPane.add(courseListView, 3, 4);
@@ -167,8 +227,55 @@ public class StudentInformation
     private void addTextArea(GridPane gridPane)
     {
         displayTextArea = new TextArea();
-
-        // TODO: Display details on Click
         gridPane.add(displayTextArea, 0, 8);
+    }
+
+    private String getDisplayText()
+    {
+        String displayText = "";
+
+        displayText = nameTextField.getText() + ", " + addressTextField.getText() + ", " + provinceTextField.getText() + ", " + cityTextField.getText() + ", " + postalCodeTextField.getText() + ", " + phoneNumberTextField.getText() + ", " + emailTextField.getText();
+
+        displayText += "\n";
+        displayText += getProgram() + "\n";
+        displayText += "Courses\n";
+        displayText += getListViewItems();
+        displayText += getAdditionalWork();
+
+        return displayText;
+    }
+
+    private String getListViewItems()
+    {
+        StringBuilder items = new StringBuilder();
+
+        for (var item : courseListView.getItems())
+        {
+            items.append(item).append("\n");
+        }
+
+        return items.toString();
+    }
+
+    private String getProgram()
+    {
+        return ((RadioButton) toggleGroup.getSelectedToggle()).getText();
+    }
+
+    private String getAdditionalWork()
+    {
+        String additionalWork = "";
+
+        if (studentCouncilCheckBox.isSelected())
+        {
+            additionalWork += studentCouncilCheckBox.getText() + "\n";
+        }
+
+        if (volunteerWorkCheckBox.isSelected())
+        {
+            additionalWork += volunteerWorkCheckBox.getText();
+        }
+
+        return additionalWork;
     }
 }
