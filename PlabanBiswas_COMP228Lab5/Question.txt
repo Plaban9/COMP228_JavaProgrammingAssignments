@@ -1,0 +1,74 @@
+
+
+Centennial College
+
+COMP 228: Java Programming
+LAB #5 - Developing Database Applications using JDBC.
+
+
+Student: ______________________________________________________________________
+
+Due Date:	Week 12.
+
+Purpose:	The purpose of this Lab assignment is to:
+•	Practice JDBC in Java Applications
+•	Develop a GUI Java application with data access capabilities
+References:	Read the textbook, ppt slides, and consult references (if any).
+This material provides the necessary information you need to complete the exercises.
+Be sure to read the following general instructions carefully:
+
+•	Students can work in pairs for this assignment using pair programming technique (https://en.wikipedia.org/wiki/Pair_programming).
+-	You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
+
+•	You must name your Eclipse project according to the following rule:
+YourFullName_COMP228Labnumber
+Example: JohSmith_COMP228Lab2
+
+•	Submit your assignment in a zip file that is named according to the following rule: YourLastName_COMP228Labnumber.zip
+Example: JohSmith_COMP228Lab2.zip
+
+•	Submit a mute video of running your solution (simple video up to five minutes), The video shows the following:
+1.	Show your name and ID using a text file.
+2.	Scrolling your code on-screen slowly, this code should be compatible with the submitted project.
+3.	Show the results as required.
+
+•	Apply the naming conventions for variables, methods, classes, and packages:
+a.	variable names start with a lowercase character
+b.	classes start with an uppercase character
+c.	packages use only lowercase characters
+d.	methods start with a lowercase character
+
+
+Penalties Policies:
+1.	The assignment did not meet the instructions above faces a 20% penalty.
+2.	Late assignments will be accepted for 2 days after the due date has passed.
+Assignments will not be accepted past the 2 days limit.
+3.	Late assignments face a 35% penalty, 15% for the first day and 20% for the second day
+
+Exercise 1:
+
+Develop a GUI Java application that will allow the players to submit information about themselves and the games that they are playing on-line. The information will be stored in a simple Oracle database. The database tables are shown in the following picture:
+
+
+
+You can use SQL Developer to create your database in Oracle server.
+
+You should populate the table Game with titles of games that you have "played" during this semester.
+
+Your GUI should provide the necessary SWING or JavaFX components that will allow the user to enter and display the data. You will use JDBC to provide the following operations:
+1.	Insert game and player information into the database.
+2.	Update the existing player information.
+3.	Display reports with player and played games information. You may use a JTable or other components to display the reports. Allow the user to select player_id.
+
+Use prepared statements to implement all database operations.
+(10 marks)
+Evaluation:
+Functionality
+Correct implementation of UI and event handling.		35%
+
+Correct implementation of JDBC 		50%
+Comments, correct naming of variables, methods, classes, etc.	5%
+
+Friendly input/output	10%
+Total	100%
+
