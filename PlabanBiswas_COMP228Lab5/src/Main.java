@@ -14,6 +14,5 @@ public class Main extends Application
     {
         Exercise1Manager exercise1Manager = new Exercise1Manager(primaryStage, 1000, 400);
         exercise1Manager.showParentView();
-
     }
 }
