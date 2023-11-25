@@ -2,16 +2,19 @@ package exercise1.view;
 
 import exercise1.Exercise1Manager;
 import exercise1.controller.GameController;
+import exercise1.model.GameModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import javax.swing.table.DefaultTableModel;
 
 public class GameView
 {
@@ -35,21 +38,23 @@ public class GameView
 
     public void showGameView()
     {
-        //TODO: Make Button equal length
-        //TODO: Set label and text field Size
-
         Label gameTitle = new Label("Game Title: ");
         TextField gameTitleTextField = new TextField();
         gameTitleTextField.setPromptText("Enter Game Title Here...");
 
         Button insertButton = new Button("Add Game");
+        insertButton.setMinWidth(150);
         Button displayButton = new Button("Display Games");
+        displayButton.setMinWidth(150);
 
         HBox titleHBox = new HBox(10, gameTitle, gameTitleTextField);
+        titleHBox.setAlignment(Pos.CENTER);
 
         Label operationResult = new Label("Operation Result: ");
-        operationResult.setAlignment(Pos.BASELINE_LEFT);
+        operationResult.setAlignment(Pos.CENTER_LEFT);
         TextArea resultDisplay = new TextArea();
+        resultDisplay.setMinWidth(0.45 * width);
+        resultDisplay.setMaxWidth(0.45 * width);
         resultDisplay.setEditable(false);
 
         VBox inputAreaVBox = new VBox(10, titleHBox);
@@ -58,11 +63,11 @@ public class GameView
 
         VBox buttonAreaVBox = new VBox(10, insertButton, displayButton);
         buttonAreaVBox.setAlignment(Pos.CENTER);
-        buttonAreaVBox.setMinWidth(0.3 * width);
+        buttonAreaVBox.setMinWidth(0.2 * width);
 
         VBox resultAreaVBox = new VBox(10, operationResult, resultDisplay);
         resultAreaVBox.setAlignment(Pos.CENTER);
-        resultAreaVBox.setMinWidth(0.3 * width);
+        resultAreaVBox.setMinWidth(0.2 * width);
 
         String cssLayout = """
                 -fx-border-color: grey;
@@ -111,9 +116,10 @@ public class GameView
             @Override
             public void handle(ActionEvent actionEvent)
             {
-                //TODO: List Logic
                 if (gameController.selectOperation(exercise1Manager.getDatabaseConnection()))
                 {
+                    exercise1Manager.showTable(getTableModel());
+
                     resultDisplay.setText("Games listed successfully!");
                 }
                 else
@@ -124,6 +130,42 @@ public class GameView
         });
 
         gridPane.add(gameAreaHBox, 0, 1);
+    }
+
+    private DefaultTableModel getDefaultTableModel()
+    {
+        String[] columnNames = {"game_id", "game_title"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+        for (var gameModel : gameController.getGameModelArrayList())
+        {
+            int game_id = gameModel.getGameId();
+            String game_title = gameModel.getGameTitle();
+            String[] data = {game_id + "", game_title};
+            tableModel.addRow(data);
+        }
+
+        return tableModel;
+    }
+
+    private TableView<GameModel> getTableModel()
+    {
+        ObservableList<GameModel> data = FXCollections.observableArrayList(gameController.getGameModelArrayList());
+
+        TableView<GameModel> table = new TableView<>();
+        table.setEditable(true);
+
+        TableColumn gameId = new TableColumn("game_id");
+        gameId.setCellValueFactory(new PropertyValueFactory<>("gameId"));
+
+        TableColumn gameTitle = new TableColumn("game_title");
+        gameTitle.setCellValueFactory(new PropertyValueFactory<>("gameTitle"));
+
+
+        table.getColumns().addAll(gameId, gameTitle);
+        table.setItems(data);
+
+        return table;
     }
 
     public void hideGameView()

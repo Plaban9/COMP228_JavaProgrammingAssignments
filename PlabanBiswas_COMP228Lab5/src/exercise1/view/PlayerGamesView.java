@@ -2,12 +2,16 @@ package exercise1.view;
 
 import exercise1.Exercise1Manager;
 import exercise1.controller.PlayerGamesController;
+import exercise1.model.PlayerGamesModel;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,6 +19,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.table.DefaultTableModel;
+import java.sql.Date;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
@@ -44,28 +50,44 @@ public class PlayerGamesView
         ArrayList<String> gameList = getGamesList();
         ArrayList<String> playerList = getPlayersList();
 
+        int min_width_label = 100;
+        int input_width = 150;
+        int button_width = 200;
+
         Label gameLabel = new Label("Choose Game: ");
+        gameLabel.setMinWidth(min_width_label);
         ComboBox<String> gameComboBox = new ComboBox<>(FXCollections.observableArrayList(gameList));
+        gameComboBox.setMinWidth(input_width);
 
         Label playerLabel = new Label("Choose Player: ");
+        playerLabel.setMinWidth(min_width_label);
         ComboBox<String> playerComboBox = new ComboBox<>(FXCollections.observableArrayList(playerList));
+        playerComboBox.setMinWidth(input_width);
 
         Label playerDateLabel = new Label("Enter Date: ");
+        playerDateLabel.setMinWidth(min_width_label);
         DatePicker playerDatePicker = new DatePicker();
         playerDatePicker.setPromptText("Enter play date...");
+        playerDatePicker.setMinWidth(input_width);
 
         Label playerScoreLabel = new Label("Score: ");
+        playerScoreLabel.setMinWidth(min_width_label);
         TextField playerScoreTextField = new TextField();
         playerScoreTextField.setPromptText("Enter player score...");
+        playerScoreTextField.setMinWidth(input_width);
 
         Button insertButton = new Button("Add");
+        insertButton.setMinWidth(button_width);
         Button displayButton = new Button("Display");
+        displayButton.setMinWidth(button_width);
         Button displayByIdButton = new Button("Display by Player");
-
+        displayByIdButton.setMinWidth(button_width);
 
         Label operationResult = new Label("Operation Result: ");
-        operationResult.setAlignment(Pos.BASELINE_LEFT);
+        operationResult.setAlignment(Pos.CENTER_LEFT);
         TextArea resultDisplay = new TextArea();
+        resultDisplay.setMinWidth(0.45 * width);
+        resultDisplay.setMaxWidth(0.45 * width);
         resultDisplay.setEditable(false);
 
         HBox gameHBox = new HBox(10, gameLabel, gameComboBox);
@@ -78,6 +100,8 @@ public class PlayerGamesView
                 playerHBox,
                 dateHBox,
                 scoreHBox);
+        inputArea.setAlignment(Pos.CENTER);
+        inputArea.setPadding(new Insets(10));
 
         VBox buttonBoxes = new VBox(10,
                 insertButton,
@@ -156,7 +180,15 @@ public class PlayerGamesView
             @Override
             public void handle(ActionEvent actionEvent)
             {
-                playerGamesController.selectOperation(exercise1Manager.getDatabaseConnection());
+                if (playerGamesController.selectOperation(exercise1Manager.getDatabaseConnection()))
+                {
+                    exercise1Manager.showTable(getTableModel());
+                    resultDisplay.setText("Showing player game Details.");
+                }
+                else
+                {
+                    resultDisplay.setText("Error while Showing player Details.");
+                }
             }
         });
 
@@ -175,6 +207,7 @@ public class PlayerGamesView
 
                 if (playerGamesController.selectOperation(exercise1Manager.getDatabaseConnection(), playerId + 1))
                 {
+                    exercise1Manager.showTable(getTableModel());
                     resultDisplay.setText("Showing player game Details.");
                 }
                 else
@@ -206,6 +239,57 @@ public class PlayerGamesView
         {
             playerAreaHBox.setVisible(false);
         }
+    }
+
+    private DefaultTableModel getDefaultTableModel()
+    {
+        String[] columnNames = {"player_game_id", "game_id", "player_id", "playing_date", "score"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+        for (var playerGameModel : playerGamesController.getPlayerGamesModelArrayList())
+        {
+            int playerGameId = playerGameModel.getPlayerGameId();
+            int gameId = playerGameModel.getGameId();
+            int playerId = playerGameModel.getPlayerId();
+            Date date = playerGameModel.getPlayingDate();
+            int score = playerGameModel.getScore();
+
+            // create a single array of one row's worth of data
+            String[] data = {playerGameId + "", gameId + "", playerId + "", date.toString(), score + ""};
+
+            // and add this row of data into the table model
+            tableModel.addRow(data);
+        }
+
+        return tableModel;
+    }
+
+    private TableView<PlayerGamesModel> getTableModel()
+    {
+        ObservableList<PlayerGamesModel> data = FXCollections.observableArrayList(playerGamesController.getPlayerGamesModelArrayList());
+
+        TableView<PlayerGamesModel> table = new TableView<>();
+        table.setEditable(true);
+
+        TableColumn playerGamesId = new TableColumn("player_game_id");
+        playerGamesId.setCellValueFactory(new PropertyValueFactory<>("playerGameId"));
+
+        TableColumn gameId = new TableColumn("game_id");
+        gameId.setCellValueFactory(new PropertyValueFactory<>("gameId"));
+
+        TableColumn playerId = new TableColumn("player_id");
+        playerId.setCellValueFactory(new PropertyValueFactory<>("playerId"));
+
+        TableColumn playingDate = new TableColumn("playing_date");
+        playingDate.setCellValueFactory(new PropertyValueFactory<>("playingDate"));
+
+        TableColumn score = new TableColumn("score");
+        score.setCellValueFactory(new PropertyValueFactory<>("score"));
+
+        table.getColumns().addAll(playerGamesId, gameId, playerId, playingDate, score);
+        table.setItems(data);
+
+        return table;
     }
 
     private int selectPlayer()

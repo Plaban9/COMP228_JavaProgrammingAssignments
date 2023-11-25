@@ -12,7 +12,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Exercise1Manager exercise1Manager = new Exercise1Manager(primaryStage, 1600, 900);
+        Exercise1Manager exercise1Manager = new Exercise1Manager(primaryStage, 1000, 400);
         exercise1Manager.showParentView();
 
     }

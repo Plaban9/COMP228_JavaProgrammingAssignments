@@ -170,6 +170,11 @@ public class PlayerGamesController
         }
     }
 
+    public ArrayList<PlayerGamesModel> getPlayerGamesModelArrayList()
+    {
+        return playerGamesModelArrayList;
+    }
+
     private static void log(String message)
     {
         System.out.println("<<exercise1.controller.PlayerGamesController>> " + message);

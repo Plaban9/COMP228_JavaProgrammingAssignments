@@ -78,7 +78,6 @@ public class GameController
             while(resultSet.next())
             {
                 GameModel gameModel = new GameModel(resultSet.getInt(COLUMN_GAME_ID), resultSet.getString(COLUMN_GAME_TITLE));
-
                 gameModelArrayList.add(gameModel);
             }
 

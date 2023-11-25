@@ -6,15 +6,17 @@ import exercise1.view.PlayerGamesView;
 import exercise1.view.PlayerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -86,9 +88,8 @@ public class Exercise1Manager
         gridPane.setAlignment(Pos.CENTER_LEFT);
 
 
-        gridPane.getRowConstraints().add(new RowConstraints(0.1 * height));
-        gridPane.getRowConstraints().add(new RowConstraints(0.5 * height));
-        gridPane.getRowConstraints().add(new RowConstraints(0.4 * height));
+        gridPane.getRowConstraints().add(new RowConstraints(0.15 * height));
+        gridPane.getRowConstraints().add(new RowConstraints(0.8 * height));
 
         gridPane.getColumnConstraints().add(new ColumnConstraints(width));
 
@@ -174,9 +175,28 @@ public class Exercise1Manager
 //        test(gridPane);
     }
 
-    private void showDefaultView()
+    public void showTable(GridPane gridPane, DefaultTableModel tableModel)
     {
 
+    }
+
+    public void showTable(TableView tableView)
+    {
+        Stage popUpStage = new Stage(StageStyle.DECORATED);
+        popUpStage.setWidth(550);
+        popUpStage.setHeight(450);
+
+        final VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(10, 0, 0, 10));
+        vbox.getChildren().addAll(tableView);
+
+        Scene stageScene = new Scene(vbox, 550, 450);
+        popUpStage.setScene(stageScene);
+        popUpStage.setTitle("Player Table");
+
+        popUpStage.initModality(Modality.APPLICATION_MODAL);
+        popUpStage.showAndWait();
     }
 
     private void test(GridPane gridPane)
