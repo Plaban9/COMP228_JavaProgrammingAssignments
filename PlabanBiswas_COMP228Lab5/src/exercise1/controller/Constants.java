@@ -1,3 +1,5 @@
+package exercise1.controller;
+
 public class Constants
 {
     public static class DatabaseConstants
