@@ -1,0 +1,63 @@
+
+Centennial College
+
+COMP 228: Java Programming
+Lab Assignment 6: Developing Multithreaded Applications using Java Multithreading API and Collections API.
+
+Student: ______________________________________________________________________
+
+Due Date: Week 13
+Purpose:	The puarpose of this Lab assignment is to:
+•	Practice multithreading in Java Applications
+•	Practice Collections API in Java Applications
+•	Develop a Java multithreaded application
+References:	Read the course’s text, ppt slides and class examples.
+This material provides the necessary information you need to complete the exercises.
+Be sure to read the following general instructions carefully:
+•	This is an in-class assignment. You will have to finish the assignment and demonstrate your solution in Week 13 scheduled lab session.
+
+•	This lab should be completed individually by all the students.
+-	You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
+
+•	You must name your Eclipse project according to the following rule:
+YourFullName_COMP228Labnumber
+Example: JohSmith_COMP228Lab2
+
+•	Submit your assignment in a zip file that is named according to the following rule: YourLastName_COMP228Labnumber.zip
+Example: JohSmith_COMP228Lab2.zip
+
+•	Submit a mute video of running your solution (simple video up to five minutes), The video shows the following:
+1.	Show your name and ID using a text file.
+2.	Scrolling your code on-screen slowly, this code should be compatible with the submitted project.
+3.	Show the results as required.
+
+•	Apply the naming conventions for variables, methods, classes, and packages:
+a.	variable names start with a lowercase character
+b.	classes start with an uppercase character
+c.	packages use only lowercase characters
+d.	methods start with a lowercase character
+
+
+Penalties Policies:
+1.	The assignment did not meet the instructions above faces a 20% penalty.
+2.	Late assignments will be accepted for 2 days after the due date has passed.
+Assignments will not be accepted past the 2 days limit.
+3.	Late assignments face a 35% penalty, 15% for the first day and 20% for the second day
+
+Exercise 1:
+
+This exercise is similar to PrintTask example from Week 12.
+Write a Java application that handles multiple ATM transactions (withdraw, deposit) at the same time. Create an Account class and implement both deposit and withdraw operations. Synchronize the operations to allow thread synchronization. Use Java Runnable interface to implement a Transaction class. Perform withdraw and deposit operations in run method.
+
+Create an AccountTest class to test multiple transactions (threads). Use an ArrayList to create a list of three or more Transaction objects. Use method execute of ExecutorService to execute the threads. Display the results.
+
+ (10 marks)
+Evaluation:
+Functionality
+Correct implementation of Multithreading 		50%
+Correct implementation of Collections API	30%
+Comments, correct naming of variables, methods, classes, etc.	5%
+
+Friendly input/output	15%
+Total	100%
+
