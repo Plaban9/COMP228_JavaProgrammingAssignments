@@ -7,7 +7,6 @@ import java.util.concurrent.Executors;
 public class AccountTest
 {
     private final ArrayList<Transaction> transactions;
-    private ExecutorService executorService;
 
     public AccountTest()
     {
@@ -36,22 +35,26 @@ public class AccountTest
         transactions.add(transaction5);
         transactions.add(transaction6);
 
-        executorService = Executors.newFixedThreadPool(transactions.size());
-
-        for (var transaction : transactions)
+        try (ExecutorService executorService = Executors.newFixedThreadPool(transactions.size()))
         {
-            executorService.execute(transaction);
+            for (var transaction : transactions)
+            {
+                executorService.execute(transaction);
+            }
+
+            executorService.shutdown();
+
+            while(!executorService.isTerminated())
+            {
+                // To know that all threads are done executing.
+            }
+
+            System.out.println("Performed transactions.");
+            System.out.println("<======================================== TEST COMPLETED ========================================>");
         }
-
-        executorService.shutdown();
-
-
-        while(!executorService.isTerminated())
+        catch (Exception exception)
         {
-            // To know that all threads are done executing.
+            System.out.println("Exception while performing thread test. Reason: " + exception.getMessage());
         }
-
-        System.out.println("Performed transactions.");
-        System.out.println("<======================================== TEST COMPLETED ========================================>");
     }
 }

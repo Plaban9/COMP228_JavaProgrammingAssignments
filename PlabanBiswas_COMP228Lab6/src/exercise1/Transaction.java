@@ -11,7 +11,6 @@ public class Transaction implements Runnable
 
     private static int transactionCount = 0;
 
-
     private final static Random random = new Random();
 
     public Transaction(int amount, Account account, TransactionType transactionType)
