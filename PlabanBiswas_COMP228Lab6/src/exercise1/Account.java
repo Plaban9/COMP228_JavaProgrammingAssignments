@@ -22,11 +22,11 @@ public class Account
             if (balance >= amount)
             {
                 balance -= amount;
-                System.out.println("Amount withdrawn: " + amount + ", Balance: " + balance);
+                System.out.println("Amount withdrawn: " + amount);
             }
             else
             {
-                System.out.println("Insufficient Balance to withdraw. Amount to withdraw: " + amount);
+                System.out.println("Insufficient balance to withdraw. Amount to withdraw: " + amount);
             }
 
             checkBalance();
@@ -34,7 +34,7 @@ public class Account
 
     public synchronized void checkBalance()
     {
-        System.out.println("Current Balance: " + balance);
+        System.out.println("Current balance: " + balance);
     }
 
     @Override
