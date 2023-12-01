@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Transaction implements Runnable
 {
-    private int transactionId;
+    private final int transactionId;
     private final int amount;
     private final Account account;
     private final TransactionType transactionType;
