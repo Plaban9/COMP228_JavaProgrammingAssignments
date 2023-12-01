@@ -41,7 +41,7 @@ public class Account
     public String toString()
     {
         return "Account\n{" +
-                "balance: " + balance +
+                "Balance: " + balance +
                 '}';
     }
 }

@@ -33,7 +33,7 @@ public class Transaction implements Runnable
             System.out.println("--------------------------------------------------------------------------");
 
             boolean isWriteOperation = (transactionType == TransactionType.DEPOSIT || transactionType == TransactionType.WITHDRAW);
-            System.out.println("Performing Transaction with ID: " + transactionId);
+            System.out.println("Performing transaction with ID: " + transactionId);
             System.out.println("Request for " + transactionType.name() + (isWriteOperation ? ", amount: " + amount : ""));
             System.out.println("Processing.... ");
 
@@ -69,7 +69,7 @@ public class Transaction implements Runnable
     public String toString()
     {
         return "Transaction\n{" +
-                "Transaction Id: " + transactionId +
+                "Transaction ID: " + transactionId +
                 ", Amount:  " + amount +
                 ", Transaction Type:" + transactionType +
                 ", Account: " + account.toString() +

@@ -16,8 +16,8 @@ public class AccountTest
 
     public void runTest(int balance)
     {
-        System.out.println("Starting Test");
-        System.out.println("Created Account with balance: " + balance);
+        System.out.println("<======================================== STARTING TEST ========================================>");
+        System.out.println("Created account with balance: " + balance);
         Account testAccount = new Account(balance);
 
         System.out.println("Performing transactions...");
@@ -48,10 +48,10 @@ public class AccountTest
 
         while(!executorService.isTerminated())
         {
-
+            // To know that all threads are done executing.
         }
 
         System.out.println("Performed transactions.");
-        System.out.println("Test completed.");
+        System.out.println("<======================================== TEST COMPLETED ========================================>");
     }
 }
