@@ -1,0 +1,52 @@
+
+FINAL TEST - Final
+
+Student: ______________________
+
+Be sure to read the following general instructions carefully:
+-	This lab test must be completed individually by all the students.
+-	You should submit the entire project through dropbox link on eCentennial immediately after demonstration.
+-	Submit a mute video of running your solution (simple video up to five minutes), The video shows the following:
+1.	Show your name and ID using a text file.
+2.	Scrolling your code on-screen slowly, this code should be compatible with the submitted project.
+3.	Show the results as required.
+-
+
+Exercise 1
+
+Start a new IntelliJ Java project. Name the project: YourFullName_COMP228_FinalTest_Fall2023. For example: JohnSmith_COMP228_FinalTest_Fall2023. DO NOT create a package in this project.
+
+Write a GUI application in Java that allows user to select students by their city.
+
+The user should be able to enter the city. The application should retrieve the student information from an Oracle table named Student. Here is the definition of the table:
+CREATE TABLE Students (
+   studentID char(9) NOT NULL,
+   firstName varchar (20) NOT NULL,
+   lastName varchar (20) NOT NULL,
+   address varchar (30) NOT NULL,
+   city varchar(30) NOT NULL,
+   province char(2) NOT NULL,
+   postalCode char(6) NOT NULL,
+   PRIMARY KEY (studentID)
+);
+Populate the table with several rows as below:
+insert into Students values('300111222','Sam', 'Malone', '10 Somewhere Road', 'Toronto','ON','M1Y2H2');
+commit;
+
+The information should be displayed in a JTextArea component which has scrolling abilities. Use “\t” and “\n” to format the display.
+
+Use the most appropriate layout manager classes to implement the layout of this GUI.													(100 marks)
+
+Evaluation:
+Functionality
+Correct implementation of UI (using SWING or JavaFX components, event handling)	35%
+
+
+
+
+Correct implementation of data access using JDBC (connecting with server, executing a prepared statement, displaying results) 		50%
+Comments, correct naming of variables, methods, classes, etc.	5%
+
+Friendly input/output	10%
+Total	100%
+
