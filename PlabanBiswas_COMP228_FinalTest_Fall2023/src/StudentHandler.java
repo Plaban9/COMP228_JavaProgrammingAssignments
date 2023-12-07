@@ -26,7 +26,7 @@ public class StudentHandler
     private final int width;
     private final int height;
 
-    private ArrayList<Student> studentArrayList;
+    private final ArrayList<Student> studentArrayList;
 
     public StudentHandler(Stage primaryStage, int width, int height, boolean showParentView)
     {
