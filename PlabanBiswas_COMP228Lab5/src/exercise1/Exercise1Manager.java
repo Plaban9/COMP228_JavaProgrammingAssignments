@@ -186,6 +186,8 @@ public class Exercise1Manager
         popUpStage.setWidth(550);
         popUpStage.setHeight(450);
 
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_SUBSEQUENT_COLUMNS);
+
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
